@@ -1,0 +1,62 @@
+{
+  "name": "vs-reload",
+  "version": "0.1.0",
+  "description": "Ultra-fast VS Code extension development tool with automatic hot reload",
+  "main": "index.js",
+  "bin": {
+    "vs-reload": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "npm install && npm link --force && cd example && vs-reload",
+    "dev": "node index.js",
+    "lint": "echo 'Linting...' && echo 'No linter configured yet'"
+  },
+  "keywords": [
+    "vscode",
+    "vscode-extension", 
+    "hot-reload",
+    "development-tools",
+    "cli-tool",
+    "automation",
+    "cross-platform",
+    "extension-development",
+    "developer-experience",
+    "nodejs"
+  ],
+  "author": {
+    "name": "Hakan Karadag",
+    "url": "https://github.com/hakan-karadag"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hakan-karadag/vs-reload.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hakan-karadag/vs-reload/issues"
+  },
+  "homepage": "https://github.com/hakan-karadag/vs-reload#readme",
+  "dependencies": {
+    "chokidar": "^3.5.3"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "os": [
+    "win32",
+    "darwin", 
+    "linux"
+  ],
+  "files": [
+    "src/",
+    "index.js",
+    "example/extension.js",
+    "example/package.json",
+    "README.md",
+    "README.fr.md",
+    "LICENSE"
+  ],
+  "preferGlobal": true
+}

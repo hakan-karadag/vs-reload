@@ -1,0 +1,42 @@
+{
+  "name": "vs-reload-example",
+  "displayName": "VS Reload Example",
+  "description": "Simple extension to test vs-reload functionality",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vs-reload-example.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vsReloadExample",
+          "title": "vs-reload Demo",
+          "icon": "$(rocket)"
+        }
+      ]
+    },
+    "views": {
+      "vsReloadExample": [
+        {
+          "id": "vsReloadExampleView",
+          "name": "Test View"
+        }
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/node": "14.x",
+    "@types/vscode": "^1.60.0"
+  }
+}

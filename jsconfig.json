@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2018",
+        "checkJs": true,
+        "allowJs": true,
+        "lib": [
+            "es2018"
+        ],
+        "outDir": "./dist",
+        "rootDir": "./",
+        "strict": false,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "declaration": false,
+        "sourceMap": false
+    },
+    "include": [
+        "*.js",
+        "example/**/*.js"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "**/*.test.js",
+        "**/*.spec.js"
+    ]
+}

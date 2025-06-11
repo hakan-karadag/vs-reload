@@ -1,0 +1,26 @@
+# Development files
+dev-tools/
+.git/
+.gitignore
+jsconfig.json
+package-lock.json
+
+# Node modules (already excluded by default)
+node_modules/
+
+# Example build artifacts  
+example/node_modules/
+example/package-lock.json
+example/*.map
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Test files
+test/
+*.test.js 
