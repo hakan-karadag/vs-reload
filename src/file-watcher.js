@@ -7,6 +7,7 @@ class FileWatcher {
   constructor() {
     this.fileHashes = new Map();
     this.lastChange = 0;
+    this.debounceTimer = null;
   }
 
   start(extensionPath, onChange) {
@@ -19,22 +20,19 @@ class FileWatcher {
       awaitWriteFinish: { stabilityThreshold: 200, pollInterval: 50 }
     });
 
-    this.watcher.on('change', filePath => this.handleChange(path.join(extensionPath, filePath), onChange));
-    this.watcher.on('add', filePath => this.handleChange(path.join(extensionPath, filePath), onChange));
+    const handleEvent = filePath => this.handleChange(path.join(extensionPath, filePath), onChange);
+    this.watcher.on('change', handleEvent).on('add', handleEvent);
   }
 
   handleChange(fullPath, onChange) {
     const now = Date.now();
-    if (now - this.lastChange < CONFIG.debounceMs) return;
-    
-    // Fast content check
-    if (!this.hasReallyChanged(fullPath)) return;
+    if (now - this.lastChange < CONFIG.debounceMs || !this.hasReallyChanged(fullPath)) return;
     
     this.lastChange = now;
     log(`📝 ${path.basename(fullPath)}`);
     
     clearTimeout(this.debounceTimer);
-    this.debounceTimer = setTimeout(onChange, 100);
+    this.debounceTimer = setTimeout(() => onChange(fullPath), 100);
   }
 
   hasReallyChanged(filePath) {

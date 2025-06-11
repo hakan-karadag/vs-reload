@@ -12,19 +12,21 @@
 
   🇫🇷 **Version Française (Current)** • [🇺🇸 **English Version**](README.md)
 
-  🚀 **Outil de développement ultra-rapide pour extensions VS Code** avec rechargement automatique à chaud
+  🚀 **Outil de développement pour extensions VS Code** avec rechargement automatique à chaud
 
   > Créé par [@hakan-karadag](https://github.com/hakan-karadag)
-</div> pour un développement d'extensions VS Code sans friction
+</div>
+
+Compatible uniquement avec VS Code et les forks qui respectent strictement l'architecture native
 
 ## ✨ Fonctionnalités
 
-- **🚀 Lancement automatique** : Lance automatiquement VS Code avec votre extension chargée
-- **⚡ Rechargement ultra-rapide** : Détection intelligente des changements de fichiers avec actualisation instantanée  
-- **🛡️ Tests propres** : Mode isolation optionnel avec `--disable-extensions`
+- **🎯 VS Code natif** : Optimisé pour VS Code et les forks 100% compatibles
+- **🚀 Lancement automatique** : Lance automatiquement VS Code avec l'extension chargée
+- **⚡ Rechargement ultra-rapide** : Détection intelligente des changements avec synchronisation temporaire
+- **📁 Chemins flexibles** : Utilisez `--project-path` et `--vscode-path` pour une flexibilité maximale
 - **🖥️ Multi-plateforme** : Support natif pour Windows, macOS et Linux
-- **📁 Zéro configuration** : Fonctionne immédiatement dans n'importe quel répertoire d'extension VS Code
-- **🔧 Détection intelligente** : Trouve automatiquement l'installation VS Code (même les versions portables)
+- **🔧 Zéro configuration** : Fonctionne immédiatement dans n'importe quel répertoire d'extension
 
 ## 📦 Installation
 
@@ -34,94 +36,125 @@ npm install -g vs-reload
 
 ## 🚀 Démarrage rapide
 
+### Utilisation basique (Auto-détection VS Code)
 Naviguez vers le répertoire de votre extension VS Code et exécutez :
 
 ```bash
 vs-reload
 ```
+*Fonctionne automatiquement quand vous êtes dans un répertoire d'extension avec `package.json`*
 
-C'est tout ! vs-reload va :
+### Utilisation avec chemin personnalisé
 
-1. 📦 **Auto-détecter** votre extension VS Code
-2. 🔍 **Localiser** l'installation VS Code sur votre système  
-3. 🚀 **Lancer** VS Code avec votre extension en mode développement
-4. 👀 **Surveiller** vos fichiers pour les changements
-5. ⚡ **Recharger** la fenêtre VS Code automatiquement quand vous modifiez le code
+**Spécifier le chemin VS Code (quand VS Code n'est pas dans le PATH) :**
+```bash
+vs-reload --vscode-path="/path/to/Code.exe"
+```
+
+**Spécifier le chemin de l'extension (quand vous travaillez depuis l'extérieur du répertoire d'extension) :**
+```bash
+vs-reload --project-path="/path/to/extension"
+```
+
+**Les deux chemins (configuration complètement personnalisée) :**
+```bash
+vs-reload --project-path="/remote/extension" --vscode-path="/custom/vscode"
+```
+
+**Travailler sur n'importe quelle extension depuis n'importe où :**
+```bash
+vs-reload --project-path="/path/to/my-extension"
+```
 
 ## 💻 Utilisation
 
-### Utilisation basique
-```bash
-vs-reload
-```
+### Options de ligne de commande
 
-### Options
 ```bash
-vs-reload --disable-extensions   # Lance avec un environnement d'extensions propre
+vs-reload [options]
+
+Options:
+  --project-path="/path/to/extension"   Utilise l'extension du chemin spécifié
+  --vscode-path="/path/to/vscode"       Utilise l'exécutable VS Code spécifique
 ```
 
 ### Exemple de sortie
 ```bash
-🚀 vs-reload - Outil de Développement d'Extensions VS Code
-Plateforme : Windows | Propre & Simple
+🚀 vs-reload - Outil de développement pour extensions VS Code
 
-[10:30:15] ✅ Extension détectée : Mon Extension Géniale
-[10:30:15] ℹ️ Version VS Code requise : ^1.60.0
-[10:30:15] ℹ️ Chemin de l'extension : C:\dev\mon-extension
-[10:30:16] 🔍 Recherche de l'installation VS Code...
-[10:30:16] ✅ VS Code réel trouvé dans PATH : C:\Program Files\Microsoft VS Code\Code.exe
-[10:30:16] 🔥 Lancement de VS Code en mode développement d'extension...
-[10:30:17] ✅ VS Code lancé (PID : 12345)
-[10:30:18] ✅ Extension "Mon Extension Géniale" chargée avec succès
-[10:30:18] ✅ 🎉 vs-reload est actif et prêt !
-[10:30:18] ✅ 📝 Modifiez vos fichiers d'extension → VS Code se recharge automatiquement
-[10:30:18] ℹ️ Surveillance des fichiers d'extension démarrée
-[10:30:18] ✅ Surveillance des fichiers d'extension active
+[10:30:15] 🎯 Chemin du projet : /dev/my-extension
+[10:30:15] 🎯 Chemin VS Code : /Applications/Visual Studio Code.app/Contents/MacOS/Electron
+[10:30:15] ✅ Extension détectée : My Awesome Extension
+[10:30:15] ✅ Code.exe
+[10:30:16] 🚀 Lancement...
+[10:30:17] ✅ Lancé (12345)
+[10:30:18] 🔧 My Awesome Extension chargée
+[10:30:18] 👀 Surveillance...
 
-[10:31:23] 🔥 Fichier modifié : extension.js
-[10:31:23] ℹ️ 🔄 Rechargement de l'extension pour : extension.js...
-[10:31:24] ✅ Rechargement de fenêtre réussi !
+✅ Mode développement activé !
+ℹ️ Appuyez sur Ctrl+C pour arrêter
+
+[10:31:23] 📝 extension.js
+[10:31:23] 🔄 Synchronisé : extension.js
+[10:31:23] 🔄 Rechargé
 ```
+
+## 🎯 Compatibilité
+
+vs-reload est conçu spécifiquement pour **VS Code** et fonctionne avec :
+
+| Éditor | Compatibilité | Statut |
+|--------|---------------|---------|
+| **VS Code** | ✅ Support complet | **Recommandé** |
+| **VS Code Insiders** | ✅ Support complet | **Testé** |
+| **Versions portables VS Code** | ✅ Support complet | **Compatible** |
+| **Forks tiers** | ⚠️ Dépend de la compatibilité | **Non garanti** |
+
+### ⚠️ Exigences strictes de compatibilité
+
+Pour qu'un éditeur fonctionne avec vs-reload, il **DOIT** :
+- **Supporter** l'argument `--extensionDevelopmentPath` nativement
+- **Implémenter** la commande API `workbench.action.reloadWindow`
+- **Respecter** l'architecture VS Code pour le développement d'extensions
+- **Maintenir** la compatibilité avec le cycle de vie des extensions VS Code
+
+### 🚫 Forks non compatibles
+
+De nombreux éditeurs basés sur VS Code ne supportent **PAS** complètement le développement d'extensions et causeront des dysfonctionnements ou plantages.
 
 ## 🔧 Comment ça fonctionne
 
-vs-reload utilise une approche multi-plateforme sophistiquée pour fournir un développement d'extensions VS Code sans friction :
+vs-reload utilise un système d'injection temporaire sophistiqué :
+
+### Système d'injection temporaire
+- **Copie temporaire** : Création d'une copie complète de l'extension dans `/tmp/`
+- **Injection propre** : Code de rechargement injecté uniquement dans la copie temporaire
+- **Synchronisation automatique** : Mise à jour en temps réel des fichiers modifiés
+- **Aucune pollution** : Les fichiers source originaux ne sont jamais touchés
 
 ### Détection intelligente de VS Code
-- **Résolution PATH** : Vérifie le PATH système pour l'exécutable VS Code
-- **Filtrage des forks** : Exclut automatiquement Cursor, Windsurf, VSCodium et autres forks
-- **Résolution des fichiers batch** : Sur Windows, résout `code.cmd` vers le vrai `Code.exe`
-- **Chemins de secours** : Recherche dans les répertoires d'installation communs en sauvegarde
+- **Auto-détection** : Trouve VS Code dans le PATH et répertoires d'installation communs
+- **Chemins personnalisés** : Utilisez `--vscode-path` pour spécifier une installation VS Code
+- **Validation stricte** : Vérifie la compatibilité avant le lancement
 
-### Surveillance intelligente des fichiers
-- **Surveillance sélective** : Surveille uniquement les fichiers d'extension pertinents (JS, TS, JSON, etc.)
-- **Changements avec anti-rebond** : Empêche les rechargements excessifs pendant les modifications rapides de fichiers  
-- **Événements multi-plateformes** : Utilise les événements natifs du système de fichiers pour une performance optimale
-
-### Rechargement natif de fenêtre
-- **Windows** : Automatisation VBScript pour activation et rechargement fiables de fenêtre
-- **macOS** : Intégration AppleScript pour exécution transparente de Cmd+R
-- **Linux** : Automatisation xdotool pour gestion de fenêtre et simulation de touches
+### Gestion flexible de projets
+- **Auto-détection** : Fonctionne dans le répertoire courant par défaut
+- **Chemins personnalisés** : Utilisez `--project-path` pour spécifier l'emplacement de l'extension
+- **Développement distant** : Parfait pour Docker, WSL, ou systèmes de fichiers distants
 
 ## ⚙️ Configuration
 
-vs-reload fonctionne avec des paramètres par défaut sensés mais peut être personnalisé en modifiant le source :
+vs-reload fonctionne avec des paramètres par défaut sensés. La configuration peut être modifiée dans le code source :
 
 ```javascript
 const CONFIG = {
-  debounceMs: 500,          // Temps d'anti-rebond pour changement de fichier
-  monitorInterval: 3000,    // Intervalle de surveillance du processus
-  launchDelay: 1000,        // Temps de stabilisation VS Code
-  
+  debounceMs: 200,          // Temps d'anti-rebond pour changement de fichier
+  launchDelay: 400,         // Temps de stabilisation VS Code
   watchPatterns: [          // Motifs de fichiers surveillés
-    '**/*.js', '**/*.ts', '**/*.jsx', '**/*.tsx',
-    '**/*.json', '**/*.vue', '**/*.svelte', '**/*.md',
-    '**/*.css', '**/*.scss', '**/*.html'
+    '**/*.js', '**/*.ts', '**/*.jsx', '**/*.tsx', '**/*.json'
   ],
-  
   ignorePatterns: [         // Répertoires ignorés
-    '**/node_modules/**', '**/.git/**', '**/dist/**',
-    '**/build/**', '**/out/**', '**/.vscode-test/**'
+    '**/node_modules/**', '**/.git/**', '**/out/**'
   ]
 };
 ```
@@ -139,17 +172,11 @@ npm test
 
 ## 🌐 Compatibilité des plateformes
 
-| Plateforme | Détection VS Code | Rechargement fenêtre | Statut |
-|----------|------------------|---------------|---------|
-| **Windows 10/11** | ✅ PATH + Registre + Program Files | ✅ Automatisation VBScript | **Entièrement testé** |
-| **macOS** | ✅ PATH + Dossier Applications | ✅ AppleScript | **Compatible** |  
-| **Linux** | ✅ PATH + gestionnaires de paquets | ✅ xdotool | **Compatible** |
-
-### Installations VS Code supportées
-- ✅ **VS Code officiel** (Microsoft)
-- ✅ **VS Code portable** 
-- ✅ **Installations utilisateur/système**
-- ❌ **Forks** (Cursor, Windsurf, VSCodium) - *Intentionnellement exclus pour la compatibilité*
+| Plateforme | Auto-détection | Chemins personnalisés | Statut |
+|----------|---------------|---------------------|---------|
+| **Windows 10/11** | ✅ PATH + Registre + Program Files | ✅ Support complet | **Entièrement testé** |
+| **macOS** | ✅ PATH + Dossier Applications | ✅ Support complet | **Compatible** |  
+| **Linux** | ✅ PATH + gestionnaires de paquets | ✅ Support complet | **Compatible** |
 
 ## 🛠️ Dépannage
 
@@ -157,33 +184,31 @@ npm test
 
 **vs-reload ne trouve pas VS Code**
 ```bash
-# Assurez-vous que VS Code est dans votre PATH
+# Utilisez un chemin personnalisé vers VS Code
+vs-reload --vscode-path="/path/to/Code.exe"
+
+# Ou assurez-vous que VS Code est dans le PATH
 code --version
-
-# Ou installez VS Code depuis : https://code.visualstudio.com/
 ```
 
-**Le rechargement automatique ne fonctionne pas**
+**Extension pas dans le répertoire courant**
 ```bash
-# Essayez le rechargement manuel dans VS Code
-Ctrl+R (Windows/Linux) ou Cmd+R (macOS)
-
-# Ou utilisez la Palette de Commandes
-Ctrl+Shift+P → "Reload Window"
+# Spécifiez le chemin de l'extension
+vs-reload --project-path="/path/to/extension"
 ```
 
-**Erreurs de permissions sur Linux**
+**L'éditeur se ferme immédiatement**
 ```bash
-# Installez xdotool pour l'automatisation de fenêtre
-sudo apt install xdotool  # Ubuntu/Debian
-sudo dnf install xdotool  # Fedora
+# Cela indique un éditeur non compatible avec le développement d'extensions VS Code
+# Utilisez VS Code officiel :
+vs-reload --vscode-path="/path/to/official/Code.exe"
 ```
 
 ## 📊 Performance
 
-- **🚀 Temps de lancement** : ~1 seconde
-- **⚡ Vitesse de rechargement** : ~500ms  
-- **💾 Utilisation mémoire** : <50MB
+- **🚀 Temps de lancement** : ~400ms
+- **⚡ Vitesse de rechargement** : ~200ms  
+- **💾 Utilisation mémoire** : <30MB
 - **📁 Surveillance fichiers** : Événements OS natifs
 - **🔄 Impact CPU** : Minimal (<1%)
 
@@ -193,12 +218,12 @@ Les contributions sont les bienvenues ! vs-reload a une architecture propre et m
 
 ```
 src/
-├── cli.js              # Point d'entrée principal & orchestration
+├── cli.js              # Point d'entrée principal & analyse des arguments
 ├── utils.js            # Configuration & utilitaires partagés  
-├── extension-detector.js # Validation d'extension & métadonnées
+├── extension-detector.js # Validation d'extension avec chemins personnalisés
 ├── vscode-manager.js   # Découverte VS Code & résolution de chemin
-├── extension-manager.js # Cycle de vie processus & automatisation rechargement
-├── file-watcher.js     # Surveillance intelligente de fichiers
+├── extension-manager.js # Cycle de vie processus & injection temporaire
+├── file-watcher.js     # Surveillance intelligente de fichiers avec sync
 └── example/            # Extension de test pour développement
 ```
 
@@ -224,7 +249,7 @@ npm link
 
 <div align="center">
   
-**⭐ Mettez une étoile à ce repo si vs-reload accélère votre développement d'extensions VS Code !**
+**⭐ Mettez une étoile à ce repo si vs-reload accélère votre développement d'extensions !**
 
 Créé avec ❤️ par [@hakan-karadag](https://github.com/hakan-karadag)
 
