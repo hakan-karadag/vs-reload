@@ -4,7 +4,7 @@
   "description": "Ultra-fast VS Code extension development tool with automatic hot reload",
   "main": "index.js",
   "bin": {
-    "vs-reload": "./index.js"
+    "vs-reload": "index.js"
   },
   "scripts": {
     "start": "node index.js",
@@ -31,7 +31,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hakan-karadag/vs-reload.git"
+    "url": "git+https://github.com/hakan-karadag/vs-reload.git"
   },
   "bugs": {
     "url": "https://github.com/hakan-karadag/vs-reload/issues"
