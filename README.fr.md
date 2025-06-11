@@ -124,7 +124,14 @@ De nombreux éditeurs basés sur VS Code ne supportent **PAS** complètement le 
 
 ## 🔧 Comment ça fonctionne
 
-vs-reload utilise un système d'injection temporaire sophistiqué :
+vs-reload utilise un système d'injection temporaire sophistiqué avec signaux de reload basés sur JSON :
+
+### Système de rechargement intelligent
+- **Fichier signal JSON** : Utilise `reload.json` avec métadonnées (timestamp, raison, info outil)
+- **Surveillance intelligente** : L'extension helper surveille la création de `reload.json`
+- **Reload fiable** : Utilise la commande native VS Code `workbench.action.reloadWindow`
+- **Multi-plateforme** : Aucune automatisation clavier fragile (Ctrl+R, SendKeys, xdotool)
+- **Logs détaillés** : Affiche la raison du reload et timestamp dans la console VS Code
 
 ### Système d'injection temporaire
 - **Copie temporaire** : Création d'une copie complète de l'extension dans `/tmp/`
@@ -148,13 +155,13 @@ vs-reload fonctionne avec des paramètres par défaut sensés. La configuration 
 
 ```javascript
 const CONFIG = {
-  debounceMs: 200,          // Temps d'anti-rebond pour changement de fichier
-  launchDelay: 400,         // Temps de stabilisation VS Code
+  debounceMs: 150,          // Temps d'anti-rebond pour changement de fichier
+  launchDelay: 300,         // Temps de stabilisation VS Code
   watchPatterns: [          // Motifs de fichiers surveillés
     '**/*.js', '**/*.ts', '**/*.jsx', '**/*.tsx', '**/*.json'
   ],
   ignorePatterns: [         // Répertoires ignorés
-    '**/node_modules/**', '**/.git/**', '**/out/**'
+    '**/node_modules/**', '**/.git/**', '**/out/**', '**/reload.json'
   ]
 };
 ```
@@ -206,11 +213,12 @@ vs-reload --vscode-path="/path/to/official/Code.exe"
 
 ## 📊 Performance
 
-- **🚀 Temps de lancement** : ~400ms
-- **⚡ Vitesse de rechargement** : ~200ms  
+- **🚀 Temps de lancement** : ~300ms
+- **⚡ Vitesse de rechargement** : ~150ms  
 - **💾 Utilisation mémoire** : <30MB
 - **📁 Surveillance fichiers** : Événements OS natifs
 - **🔄 Impact CPU** : Minimal (<1%)
+- **🎯 Signal JSON** : Système de reload ultra-fiable et multi-plateforme
 
 ## 🤝 Contribution
 

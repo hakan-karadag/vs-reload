@@ -124,7 +124,14 @@ Many VS Code-based editors do **NOT** fully support extension development and wi
 
 ## 🔧 How It Works
 
-vs-reload uses a sophisticated temporary injection system to provide seamless extension development:
+vs-reload uses a sophisticated temporary injection system with JSON-based reload signals:
+
+### Smart Reload System
+- **JSON signal file**: Uses `reload.json` with metadata (timestamp, reason, tool info)
+- **Intelligent watching**: Extension helper monitors for `reload.json` creation
+- **Reliable reload**: Uses VS Code's native `workbench.action.reloadWindow` command
+- **Cross-platform**: No fragile keyboard automation (Ctrl+R, SendKeys, xdotool)
+- **Detailed logging**: Shows reload reason and timestamp in VS Code console
 
 ### Temporary Injection System
 - **Temporary copy**: Creates a complete extension copy in `/tmp/`
@@ -148,13 +155,13 @@ vs-reload works with sensible defaults. Configuration can be modified in the sou
 
 ```javascript
 const CONFIG = {
-  debounceMs: 200,          // File change debounce time
-  launchDelay: 400,         // VS Code stabilization time
+  debounceMs: 150,          // File change debounce time
+  launchDelay: 300,         // VS Code stabilization time
   watchPatterns: [          // Monitored file patterns
     '**/*.js', '**/*.ts', '**/*.jsx', '**/*.tsx', '**/*.json'
   ],
   ignorePatterns: [         // Ignored directories
-    '**/node_modules/**', '**/.git/**', '**/out/**'
+    '**/node_modules/**', '**/.git/**', '**/out/**', '**/reload.json'
   ]
 };
 ```
@@ -206,11 +213,12 @@ vs-reload --vscode-path="/path/to/official/Code.exe"
 
 ## 📊 Performance
 
-- **🚀 Launch time**: ~400ms
-- **⚡ Reload speed**: ~200ms  
+- **🚀 Launch time**: ~300ms
+- **⚡ Reload speed**: ~150ms  
 - **💾 Memory usage**: <30MB
 - **📁 File watching**: Native OS events
 - **🔄 CPU impact**: Minimal (<1%)
+- **🎯 JSON signal**: Ultra-reliable, cross-platform reload system
 
 ## 🤝 Contributing
 
