@@ -1,7 +1,7 @@
 // extension.js
 const vscode = require('vscode');
 
-const test = "test 2";
+const test = "test 3";
 
 // Simple tree item for the test view
 class TestTreeItem extends vscode.TreeItem {

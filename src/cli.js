@@ -45,7 +45,7 @@ const main = async () => {
     // 5. Ready message
     console.log('');
     log('✅ Development mode active!');
-    log('ℹ️ Press Ctrl+C to stop');
+    log('🟦 Press Ctrl+C to stop');
     console.log('');
 
     // 6. Handle shutdown gracefully
