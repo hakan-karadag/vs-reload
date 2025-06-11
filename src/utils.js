@@ -1,8 +1,8 @@
 const CONFIG = {
-  debounceMs: 200,
-  launchDelay: 400,
+  debounceMs: 150,
+  launchDelay: 300,
   watchPatterns: ['**/*.js', '**/*.ts', '**/*.jsx', '**/*.tsx', '**/*.json'],
-  ignorePatterns: ['**/node_modules/**', '**/.git/**', '**/out/**']
+  ignorePatterns: ['**/node_modules/**', '**/.git/**', '**/out/**', '**/reload.json']
 };
 
 const log = msg => console.log(`[${new Date().toLocaleTimeString()}] ${msg}`);

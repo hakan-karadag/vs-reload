@@ -109,13 +109,16 @@ if (typeof activate !== 'undefined') {
     if (vs_reload_originalActivate) vs_reload_originalActivate(context);
     
     const originalExtensionPath = '${this.extensionPath.replace(/\\/g, '\\\\')}';
-    const signalFile = vs_reload_path.join(originalExtensionPath, '.vs-reload-signal');
+    const reloadJsonFile = vs_reload_path.join(originalExtensionPath, 'reload.json');
     
     if (vs_reload_fs.existsSync(originalExtensionPath)) {
       vs_reload_watcher = vs_reload_fs.watch(originalExtensionPath, (eventType, filename) => {
-        if (filename === '.vs-reload-signal' && eventType === 'rename' && vs_reload_fs.existsSync(signalFile)) {
+        if (filename === 'reload.json' && eventType === 'rename' && vs_reload_fs.existsSync(reloadJsonFile)) {
           setTimeout(() => {
             try {
+              const reloadData = JSON.parse(vs_reload_fs.readFileSync(reloadJsonFile, 'utf8'));
+              console.log(\`vs-reload: Reloading due to \${reloadData.reason || 'file change'} at \${new Date(reloadData.timestamp).toLocaleTimeString()}\`);
+              
               require('vscode').commands.executeCommand('workbench.action.reloadWindow');
             } catch (error1) {
               try {
@@ -189,12 +192,20 @@ if (typeof activate !== 'undefined') {
     if (this.isRestarting) return;
     this.isRestarting = true;
     
-    const signalFile = path.join(this.extensionPath, '.vs-reload-signal');
-    fs.writeFileSync(signalFile, Date.now().toString());
+    const reloadJsonFile = path.join(this.extensionPath, 'reload.json');
+    const reloadData = {
+      timestamp: Date.now(),
+      datetime: new Date().toISOString(),
+      reason: 'File change detected',
+      tool: 'vs-reload',
+      version: '1.0.0'
+    };
+    
+    fs.writeFileSync(reloadJsonFile, JSON.stringify(reloadData, null, 2));
     log('🔄 Reloaded');
     
     setTimeout(() => {
-      try { fs.unlinkSync(signalFile); } catch {}
+      try { fs.unlinkSync(reloadJsonFile); } catch {}
       this.isRestarting = false;
     }, 200);
   }
