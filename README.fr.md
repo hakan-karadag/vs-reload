@@ -8,7 +8,7 @@
   [![Support Plateforme](https://img.shields.io/badge/plateforme-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/hakan-karadag/vs-reload)
   [![VS Code](https://img.shields.io/badge/VS%20Code-Extension%20Dev-007ACC.svg)](https://code.visualstudio.com/)
   [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D14.0.0-green.svg)](https://nodejs.org/)
-  [![Téléchargements](https://img.shields.io/npm/dt/vs-reload.svg)](https://www.npmjs.com/package/vs-reload)
+  [![Téléchargements](https://img.shields.io/npm/dt/vs-reload.svg?refresh=1)](https://www.npmjs.com/package/vs-reload)
 
   🇫🇷 **Version Française (Current)** • [🇺🇸 **English Version**](README.md)
 

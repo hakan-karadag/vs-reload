@@ -1,6 +1,6 @@
 {
   "name": "vs-reload",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Ultra-fast VS Code extension development tool with automatic hot reload",
   "main": "index.js",
   "bin": {
@@ -14,7 +14,7 @@
   },
   "keywords": [
     "vscode",
-    "vscode-extension", 
+    "vscode-extension",
     "hot-reload",
     "development-tools",
     "cli-tool",
@@ -38,7 +38,8 @@
   },
   "homepage": "https://github.com/hakan-karadag/vs-reload#readme",
   "dependencies": {
-    "chokidar": "^3.5.3"
+    "chokidar": "^3.5.3",
+    "vs-reload": "^0.1.0"
   },
   "engines": {
     "node": ">=14.0.0",
@@ -46,7 +47,7 @@
   },
   "os": [
     "win32",
-    "darwin", 
+    "darwin",
     "linux"
   ],
   "files": [
