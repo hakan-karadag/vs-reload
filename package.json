@@ -1,6 +1,6 @@
 {
   "name": "vs-reload",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ultra-fast VS Code extension development tool with automatic hot reload",
   "main": "index.js",
   "bin": {
@@ -42,8 +42,8 @@
     "vs-reload": "^0.1.0"
   },
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
   },
   "os": [
     "win32",
