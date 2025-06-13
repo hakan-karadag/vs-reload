@@ -1,7 +1,9 @@
 <div align="center">
   <img src="logo.png" alt="vs-reload Logo" width="200" height="200">
   
-  # vs-reload
+# vs-reload
+
+🚀 **Outil de développement pour extensions VS Code** avec rechargement automatique à chaud
 
   [![NPM Version](https://img.shields.io/npm/v/vs-reload.svg)](https://www.npmjs.com/package/vs-reload)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -10,12 +12,9 @@
   [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D14.0.0-green.svg)](https://nodejs.org/)
   [![Téléchargements](https://img.shields.io/npm/dt/vs-reload.svg?refresh=1)](https://www.npmjs.com/package/vs-reload)
 
-  🇫🇷 **Version Française (Current)** • [🇺🇸 **English Version**](README.md)
+  > **Version Française (Current)** • [🇺🇸 **English Version**](README.md)
 
-  🚀 **Outil de développement pour extensions VS Code** avec rechargement automatique à chaud
-
-  > Créé par [@hakan-karadag](https://github.com/hakan-karadag)
-</div>
+---
 
 Compatible uniquement avec VS Code et les forks qui respectent strictement l'architecture native
 
@@ -254,13 +253,12 @@ npm link
 - Testé avec des extensions VS Code du monde réel
 
 ---
-
 <div align="center">
   
-**⭐ Mettez une étoile à ce repo si vs-reload accélère votre développement d'extensions !**
+**⭐ VS-Reload vous a fait gagner du temps dans le développement d'extensions ? N'hésitez pas à étoiler le projet !**
 
-Créé avec ❤️ par [@hakan-karadag](https://github.com/hakan-karadag)
+Développé avec ❤️ par [@hakan-karadag](https://github.com/hakan-karadag)
 
-[🐛 Signaler un Bug](https://github.com/hakan-karadag/vs-reload/issues) • [✨ Demander une Fonctionnalité](https://github.com/hakan-karadag/vs-reload/issues) • [📖 Documentation](https://github.com/hakan-karadag/vs-reload#readme)
+[⭐ Étoiler](https://github.com/hakan-karadag/vs-reload) • [🐛 Signaler un bug](https://github.com/hakan-karadag/vs-reload/issues) • [💡 Demander une fonctionnalité](https://github.com/hakan-karadag/vs-reload/issues) • [📚 Documentation](https://github.com/hakan-karadag/vs-reload#readme)
 
 </div>

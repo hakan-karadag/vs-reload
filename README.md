@@ -3,6 +3,8 @@
   
 # vs-reload
 
+  🚀 **VS Code extension development tool** with automatic hot reload
+
   [![NPM Version](https://img.shields.io/npm/v/vs-reload.svg)](https://www.npmjs.com/package/vs-reload)
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   [![Platform Support](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/hakan-karadag/vs-reload)
@@ -10,12 +12,9 @@
   [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D14.0.0-green.svg)](https://nodejs.org/)
   [![Téléchargements](https://img.shields.io/npm/dt/vs-reload.svg?refresh=1)](https://www.npmjs.com/package/vs-reload)
 
-  🇺🇸 **English Version (Current)** • [🇫🇷 **Version Française**](README.fr.md)
+  > **English Version (Current)** • [🇫🇷 **Version Française**](README.fr.md)
 
-  🚀 **VS Code extension development tool** with automatic hot reload
-
-  > Created by [@hakan-karadag](https://github.com/hakan-karadag)
-</div>
+---
 
 Compatible only with VS Code and forks that strictly respect the native architecture
 
@@ -254,13 +253,12 @@ npm link
 - Tested with real-world VS Code extensions
 
 ---
-
 <div align="center">
   
-**⭐ Star this repo if vs-reload makes your extension development faster!**
+**⭐ If VS-Reload helped you develop extensions faster, consider starring the repo!**
 
-Created with ❤️ by [@hakan-karadag](https://github.com/hakan-karadag)
+Built with ❤️ by [@hakan-karadag](https://github.com/hakan-karadag)
 
-[🐛 Report Bug](https://github.com/hakan-karadag/vs-reload/issues) • [✨ Request Feature](https://github.com/hakan-karadag/vs-reload/issues) • [📖 Documentation](https://github.com/hakan-karadag/vs-reload#readme)
+[⭐ Star](https://github.com/hakan-karadag/vs-reload) • [🐛 Report Bug](https://github.com/hakan-karadag/vs-reload/issues) • [💡 Request Feature](https://github.com/hakan-karadag/vs-reload/issues) • [📚 Documentation](https://github.com/hakan-karadag/vs-reload#readme)
 
 </div>

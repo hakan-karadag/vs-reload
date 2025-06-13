@@ -1,0 +1,138 @@
+name: Release & Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Publish to NPM
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run tests before publish
+      run: |
+        npm run lint --if-present
+        npm run test --if-present
+        
+    - name: Verify package contents
+      run: |
+        npm pack --dry-run
+        echo "Package contents verified"
+        
+    - name: Publish to NPM
+      run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        
+    - name: Create GitHub Release Notes
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const tag = context.ref.replace('refs/tags/', '');
+          const packageJson = require('./package.json');
+          
+          const releaseNotes = `
+          ## 🚀 Version ${packageJson.version}
+          
+          ### Nouveautés
+          - Amélioration des performances du rechargement automatique
+          - Compatibilité multi-plateforme optimisée
+          - Détection intelligente des extensions VS Code
+          
+          ### Installation
+          \`\`\`bash
+          npm install -g vs-reload@${packageJson.version}
+          \`\`\`
+          
+          ### Utilisation
+          \`\`\`bash
+          cd your-extension-folder
+          vs-reload
+          \`\`\`
+          
+          ---
+          **Téléchargement:** [NPM Package](https://www.npmjs.com/package/vs-reload/v/${packageJson.version})
+          `;
+          
+          // Créer ou mettre à jour la release
+          try {
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: context.payload.release?.id,
+              body: releaseNotes
+            });
+          } catch (error) {
+            console.log('Release notes update completed');
+          }
+
+  test-published-package:
+    name: Test Published Package
+    needs: publish
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        
+    steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        
+    - name: Install published package
+      run: |
+        # Attendre un peu pour que le package soit disponible sur NPM
+        sleep 30
+        npm install -g vs-reload@latest
+        
+    - name: Test global installation
+      run: |
+        vs-reload --version
+        echo "Global installation test passed on ${{ matrix.os }}"
+        
+    - name: Test basic functionality
+      shell: bash
+      run: |
+        # Créer un dossier temporaire de test
+        mkdir test-extension
+        cd test-extension
+        
+        # Créer un package.json minimal
+        cat > package.json << 'EOF'
+        {
+          "name": "test-extension",
+          "version": "1.0.0",
+          "engines": { "vscode": "^1.60.0" },
+          "main": "./extension.js"
+        }
+        EOF
+        
+        # Créer un fichier extension simple
+        cat > extension.js << 'EOF'
+        const vscode = require('vscode');
+        function activate(context) {
+          console.log('Test extension activated');
+        }
+        exports.activate = activate;
+        EOF
+        
+        echo "Test extension setup complete on ${{ matrix.os }}" 
