@@ -1,6 +1,7 @@
 # Development files
 dev-tools/
 .git/
+.github/
 .gitignore
 jsconfig.json
 package-lock.json
