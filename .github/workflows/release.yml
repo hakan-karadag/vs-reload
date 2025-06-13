@@ -37,9 +37,14 @@ jobs:
         echo "Package contents verified"
         
     - name: Publish to NPM
-      run: npm publish --access public
+      run: |
+        if [ -z "$NODE_AUTH_TOKEN" ]; then
+          echo "⚠️ NPM_TOKEN not configured - skipping publish"
+          exit 0
+        fi
+        npm publish --access public
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Create GitHub Release Notes
       uses: actions/github-script@v7

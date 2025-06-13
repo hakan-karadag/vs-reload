@@ -34,6 +34,7 @@ jobs:
         fi
         
     - name: Update dependencies
+      id: update
       if: steps.outdated.outputs.has_updates == 'true'
       run: |
         echo "Mise à jour des dépendances mineures et de patch..."
@@ -43,14 +44,14 @@ jobs:
         # Vérifier si des changements ont été faits
         if git diff --quiet package*.json; then
           echo "Aucune mise à jour disponible"
-          echo "updates_made=false" >> $GITHUB_ENV
+          echo "updates_made=false" >> $GITHUB_OUTPUT
         else
           echo "Des mises à jour ont été appliquées"
-          echo "updates_made=true" >> $GITHUB_ENV
+          echo "updates_made=true" >> $GITHUB_OUTPUT
         fi
         
     - name: Run tests after update
-      if: env.updates_made == 'true'
+      if: steps.update.outputs.updates_made == 'true'
       run: |
         echo "Exécution des tests après mise à jour..."
         npm ci
@@ -62,13 +63,13 @@ jobs:
         vs-reload --version || echo "Version check complete"
         
     - name: Security audit
-      if: env.updates_made == 'true'
+      if: steps.update.outputs.updates_made == 'true'
       run: |
         echo "Audit de sécurité après mise à jour..."
         npm audit --audit-level=high
         
     - name: Create Pull Request
-      if: env.updates_made == 'true'
+      if: steps.update.outputs.updates_made == 'true'
       uses: peter-evans/create-pull-request@v5
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
