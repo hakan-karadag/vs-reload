@@ -13,6 +13,7 @@
   [![Téléchargements](https://img.shields.io/npm/dt/vs-reload.svg?refresh=1)](https://www.npmjs.com/package/vs-reload)
 
   > **Version Française (Current)** • [🇺🇸 **English Version**](README.md)
+</div>
 
 ---
 
